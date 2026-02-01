@@ -1,11 +1,11 @@
-# Projet de semestre - Implementation de McEliece en C (codes de Goppa)
+# Projet - Implementation de McEliece en C
 
-**UE : Cryptographie post-quantique & theorie des codes**
+**Cours: Cryptographie post-quantique**
 
 Reference principale : `guide.pdf` (Sumi–Morozov–Takagi, 2011). Les algorithmes 1 a 7 de ce guide servent de fil conducteur.
 
 ## Objectif
-Implementer un mini-cryptosysteme McEliece (codes de Goppa irreductibles) en C, de la generation de cle a la decryption.
+Implementer un cryptosysteme McEliece (codes de Goppa irreductibles) en C, de la generation de cle a la decryption.
 Pour ce projet, **on ne met pas en oeuvre les matrices S et P** (pas de masquage ni permutation publique). On travaille donc directement avec G construit depuis H' systematisee.
 Le projet est decoupe en sous-problemes mathematiques clairement identifiables. Les fichiers `.h` fournis listent **uniquement** les fonctions necessaires, avec les operations mathematiques attendues.
 
@@ -25,7 +25,7 @@ Le projet est decoupe en sous-problemes mathematiques clairement identifiables. 
 - `util.h` : helpers (vecteurs binaires, poids de Hamming).
 - `rng.h` : interface de tirage aleatoire.
 
-## Description mathematique (vue d'ensemble)
+## Description mathematique
 
 ### Parametres
 - m : degre du corps F2^m (n = 2^m)
@@ -58,31 +58,31 @@ On suit la structure des Algorithmes 4 a 7 du guide :
 
 **Algorithme 4 : Decodage d'un code de Goppa binaire**
 1. **Syndrome** :  
-   S_c(X) = sum_{i=0..n-1} c_i * (X - L_i)^{-1} mod g(X).
-2. **Test codeword** : si S_c(X)=0 alors y=c.
+   \( S_c(X) = \\sum_{i=0}^{n-1} c_i (X - L_i)^{-1} \\mod g(X) \\).
+2. **Test codeword** : si \( S_c(X)=0 \) alors \( y=c \).
 3. **Inverse** :  
-   T(X) = S_c(X)^{-1} mod g(X).
+   \( T(X) = S_c(X)^{-1} \\mod g(X) \).
 4. **Racine carree** :  
-   theta(X) = sqrt(T(X) + X) mod g(X) (Algorithme 5).
+   \( \\theta(X) = \\sqrt{T(X) + X} \\mod g(X) \) (Algorithme 5).
 5. **Equation cle** :  
-   resoudre sigma(X) via l'algorithme d'Euclide etendu (Algorithme 6).
+   resoudre \( \\sigma(X) \\) via l'algorithme d'Euclide etendu (Algorithme 6).
 6. **Recherche de racines** :  
-   trouver les racines de sigma(X) dans F_{2^m} (Algorithme 7).
+   trouver les racines de \( \\sigma(X) \) dans \( F_{2^m} \) (Algorithme 7).
 7. **Construction de l'erreur** :  
-   e_i = 1 si L_i est racine, sinon e_i = 0.
-8. **Sortie** : y = c XOR e, sinon echec si aucune racine.
+   \( e_i = 1 \\) si \( L_i \) est racine, sinon \( e_i = 0 \).
+8. **Sortie** : \( y = c \\oplus e \), sinon echec si aucune racine.
 
 **Algorithme 5 : Racine carree modulo g(X)**  
-Implementer le calcul de sqrt(Q(X)) mod g(X) avec pre-calculs (tables ou polynomes R_i).
+Implementer le calcul de \( \\sqrt{Q(X)} \\mod g(X) \) avec pre-calculs (tables ou polynomes \(R_i\)).
 
 **Algorithme 6 : Equation cle**  
 Implementer l'algorithme d'Euclide etendu pour obtenir  
-sigma(X) = gamma(X)^2 + X * phi(X)^2.
+\( \\sigma(X) = \\gamma(X)^2 + X \\phi(X)^2 \).
 
 **Algorithme 7 : Recherche de racines**  
 Implementer un algorithme de type Cantor–Zassenhaus (ou variante) pour factoriser \( \\sigma(X) \) et extraire les racines.
 
-## Tests minimaux (obligatoires)
+## Tests minimaux
 1. **GF** : verifie que a * a^{-1} = 1 pour a != 0.
 2. **Poly** : verifie p = (q * d + r) avec deg(r) < deg(d).
 3. **Systematisation** : verifie que le bloc droit de H'_r est I_{m*t}.
@@ -93,7 +93,7 @@ Implementer un algorithme de type Cantor–Zassenhaus (ou variante) pour factori
 ## Parametres conseilles pour les tests
 Pour garder des temps raisonnables en TP, utilisez un petit jeu de parametres (ex. m = 6, t = 5), puis un jeu plus grand pour la validation finale.
 
-## Bareme (proposition)
+## Bareme
 - 25% : GF(2^m) + polynomes (operations de base correctes).
 - 30% : KeyGen (H, H', systematisation, G).
 - 25% : Chiffrement + Dechiffrement complet.
