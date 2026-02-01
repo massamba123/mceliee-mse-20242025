@@ -28,19 +28,19 @@ Le projet est decoupe en sous-problemes mathematiques clairement identifiables. 
 ## Description mathematique (vue d'ensemble)
 
 ### Parametres
-- m : degre du corps F2^m (n = 2^m)
+- m : degre du corps $F_2^m$ (n = 2^m)
 - t : capacite de correction d'erreurs
-- k = n - m*t
-- $g(X)$ : polynome de Goppa irreductible de degre t sur F2^m
-- $L = (alpha_0, ..., alpha_{n-1})$ : support (elements distincts de $F2^m$)
+- $k = n - m*t$
+- $g(X)$ : polynome de Goppa irreductible de degre t sur $F_2^m$
+- $L = (alpha_0, ..., alpha_{n-1})$ : support (elements distincts de $F_2^m$)
 
 ### Algorithme 1 (KeyGen) - a realiser dans `key_gen.h`
 1. Construire la matrice de parite H = Y * Z, avec
-   - $Y_{i,j} = alpha_j^i$ pour i = 0..t-1
-   - $Z = diag(g(alpha_j)^{-1})$
-2. Developper H (coefficients dans F2^m) en H' binaire de taille (m*t) x n.
-3. Mettre H' en forme systematique : H'_r = [A | I_{m*t}].
-4. Construire G = [I_k | A^T].
+   - $Y_{i,j} = alpha_j^i$ pour $i = 0, \cdots, t-1$
+   - Z = diag(g(alpha_j)^{-1})
+2. Developper H (coefficients dans $F_2^m$) en H' binaire de taille (m*t) x n.
+3. Mettre H' en forme systematique : $H'_r = [A | I_{m*t}]$.
+4. Construire $G = [I_k | A^T]$.
 5. On **ne** tire **pas** S ni P pour ce projet.
 6. G_pub = G.
 
