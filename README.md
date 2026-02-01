@@ -32,21 +32,21 @@ Le projet est decoupe en sous-problemes mathematiques clairement identifiables. 
 - t : capacite de correction d'erreurs
 - $k = n - m*t$
 - $g(X)$ : polynome de Goppa irreductible de degre t sur $F_2^m$
-- $L = (alpha_0, ..., alpha_{n-1})$ : support (elements distincts de $F_2^m$)
+- $L = (\alpha_0, ..., \alpha_{n-1})$ : support (elements distincts de $F_2^m$)
 
 ### Algorithme 1 (KeyGen) - a realiser dans `key_gen.h`
 1. Construire la matrice de parite H = Y * Z, avec
-   - $Y_{i,j} = alpha_j^i$ pour $i = 0, \cdots, t-1$
-   - Z = diag(g(alpha_j)^{-1})
+   - $Y_{i,j} = \alpha_j^i$ pour $i = 0, \cdots, t-1$
+   - Z = diag(g(\alpha_j)^{-1})
 2. Developper H (coefficients dans $F_2^m$) en H' binaire de taille (m*t) x n.
-3. Mettre H' en forme systematique : $H'_r = [A | I_{m*t}]$.
+3. Mettre H' en forme systematique : $H^{'}_r = [A | I_{m*t}]$.
 4. Construire $G = [I_k | A^T]$.
 5. On **ne** tire **pas** S ni P pour ce projet.
-6. G_pub = G.
+6. $G_{pub} = G$.
 
 ### Algorithme 2 (Encrypt) - `encrypt.h`
-- y = m * G_pub
-- c = y XOR e, avec wH(e) = t
+- $y = m * G_{pub}$
+- $c = y + e$, avec $w_H(e) = t$
 
 ### Algorithmes 3-7 (Decrypt + Decode) - `decrypt.h`
 1. Decoder via Patterson (Algorithmes 4-7) pour trouver l'erreur e et y = c XOR e.
@@ -80,13 +80,13 @@ Implementer l'algorithme d'Euclide etendu pour obtenir
 $$\\sigma(X) = \\gamma(X)^2 + X \\phi(X)^2.$$
 
 **Algorithme 7 : Recherche de racines**  
-Implementer un algorithme de type Cantor–Zassenhaus (ou variante) pour factoriser \( \\sigma(X) \) et extraire les racines.
+Implementer un algorithme de type Cantor–Zassenhaus (ou variante) pour factoriser $ \sigma(X) $ et extraire les racines.
 
 ## Tests minimaux (obligatoires)
-1. **GF** : verifie que a * a^{-1} = 1 pour a != 0.
-2. **Poly** : verifie p = (q * d + r) avec deg(r) < deg(d).
-3. **Systematisation** : verifie que le bloc droit de H'_r est I_{m*t}.
-4. **Orthogonalite** : verifie H'_r * G^T = 0.
+1. **GF** : verifie que $a * a^{-1} = 1$ pour $a \ne 0$.
+2. **Poly** : verifie $p = (q * d + r)$ avec $deg(r) < deg(d)$.
+3. **Systematisation** : verifie que le bloc droit de $H^{'}_r$ est $I_{m*t}$.
+4. **Orthogonalite** : verifie $H^{'}_r * G^T = 0$.
 5. **Chiffrement/Dechiffrement** : pour plusieurs messages, decrypt(encrypt(m)) = m.
 6. **Patterson** : verifier que le decodeur corrige des erreurs de poids <= t sur des mots de code valides.
 
@@ -94,7 +94,7 @@ Implementer un algorithme de type Cantor–Zassenhaus (ou variante) pour factori
 Pour garder des temps raisonnables en TP, utilisez un petit jeu de parametres (ex. m = 6, t = 5), puis un jeu plus grand pour la validation finale.
 
 ## Bareme (proposition)
-- 25% : GF(2^m) + polynomes (operations de base correctes).
+- 25% : $GF(2^m)$ + polynomes (operations de base correctes).
 - 30% : KeyGen (H, H', systematisation, G).
 - 25% : Chiffrement + Dechiffrement complet.
 - 10% : Tests robustes et automatises.
@@ -104,6 +104,6 @@ Pour garder des temps raisonnables en TP, utilisez un petit jeu de parametres (e
 
 ## Mapping fonctions -> operations mathematiques (resume)
 Les commentaires de chaque fonction dans les `.h` indiquent precisement :
-- les objets mathematiques manipules (F2^m, F2, matrices, polynomes),
+- les objets mathematiques manipules ($F_2^m$, $F_2$, matrices, polynomes),
 - la formule ou l'operation attendue,
 - la reference a l'algorithme du guide (1 a 7).
