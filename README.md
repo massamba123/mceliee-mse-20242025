@@ -28,10 +28,10 @@ Le projet est decoupe en sous-problemes mathematiques clairement identifiables. 
 ## Description mathematique (vue d'ensemble)
 
 ### Parametres
-- m : degre du corps $F_2^m$ (n = 2^m)
+- m : degre du corps $F_{2^m}$ (n = 2^m)
 - t : capacite de correction d'erreurs
 - $k = n - m*t$
-- $g(X)$ : polynome de Goppa irreductible de degre t sur $F_2^m$
+- $g(X)$ : polynome de Goppa irreductible de degre t sur $F_{2^m}$
 - $L = (\alpha_0, ..., \alpha_{n-1})$ : support (elements distincts de $F_2^m$)
 
 ### Algorithme 1 (KeyGen) - a realiser dans `key_gen.h`
@@ -104,6 +104,6 @@ Pour garder des temps raisonnables en TP, utilisez un petit jeu de parametres (e
 
 ## Mapping fonctions -> operations mathematiques (resume)
 Les commentaires de chaque fonction dans les `.h` indiquent precisement :
-- les objets mathematiques manipules ($F_2^m$, $F_2$, matrices, polynomes),
+- les objets mathematiques manipules ($F_{2^m}$, $F_2$, matrices, polynomes),
 - la formule ou l'operation attendue,
 - la reference a l'algorithme du guide (1 a 7).
