@@ -1,11 +1,11 @@
-# Projet de semestre - Implementation de McEliece en C (codes de Goppa)
+# Projet - Implementation de McEliece en C
 
-**UE : Cryptographie post-quantique & theorie des codes**
+**Cours: Cryptographie post-quantique**
 
 Reference principale : `guide.pdf` (Sumi–Morozov–Takagi, 2011). Les algorithmes 1 a 7 de ce guide servent de fil conducteur.
 
 ## Objectif
-Implementer un mini-cryptosysteme McEliece (codes de Goppa irreductibles) en C, de la generation de cle a la decryption.
+Implementer un cryptosysteme McEliece (codes de Goppa irreductibles) en C, de la generation de cle a la decryption.
 Pour ce projet, **on ne met pas en oeuvre les matrices S et P** (pas de masquage ni permutation publique). On travaille donc directement avec G construit depuis H' systematisee.
 Le projet est decoupe en sous-problemes mathematiques clairement identifiables. Les fichiers `.h` fournis listent **uniquement** les fonctions necessaires, avec les operations mathematiques attendues.
 
@@ -25,7 +25,7 @@ Le projet est decoupe en sous-problemes mathematiques clairement identifiables. 
 - `util.h` : helpers (vecteurs binaires, poids de Hamming).
 - `rng.h` : interface de tirage aleatoire.
 
-## Description mathematique (vue d'ensemble)
+## Description mathematique
 
 ### Parametres
 - m : degre du corps F2^m (n = 2^m)
@@ -82,7 +82,7 @@ Implementer l'algorithme d'Euclide etendu pour obtenir
 **Algorithme 7 : Recherche de racines**  
 Implementer un algorithme de type Cantor–Zassenhaus (ou variante) pour factoriser \( \\sigma(X) \) et extraire les racines.
 
-## Tests minimaux (obligatoires)
+## Tests minimaux
 1. **GF** : verifie que a * a^{-1} = 1 pour a != 0.
 2. **Poly** : verifie p = (q * d + r) avec deg(r) < deg(d).
 3. **Systematisation** : verifie que le bloc droit de H'_r est I_{m*t}.
@@ -93,7 +93,7 @@ Implementer un algorithme de type Cantor–Zassenhaus (ou variante) pour factori
 ## Parametres conseilles pour les tests
 Pour garder des temps raisonnables en TP, utilisez un petit jeu de parametres (ex. m = 6, t = 5), puis un jeu plus grand pour la validation finale.
 
-## Bareme (proposition)
+## Bareme
 - 25% : GF(2^m) + polynomes (operations de base correctes).
 - 30% : KeyGen (H, H', systematisation, G).
 - 25% : Chiffrement + Dechiffrement complet.
